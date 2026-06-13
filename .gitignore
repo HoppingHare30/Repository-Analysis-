@@ -19,3 +19,6 @@ backend/cache.json
 
 # Frontend local config
 frontend/.env
+
+# Test repositories
+Memory-Simulator/
