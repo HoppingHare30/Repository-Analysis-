@@ -13,3 +13,6 @@ __pycache__/
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# Local project cache
+backend/cache.json
