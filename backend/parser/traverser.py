@@ -18,7 +18,7 @@ def traverse_repo(root_path: str) -> List[str]:
         return []
 
     supported_extensions = {'.py', '.js', '.ts', '.jsx', '.tsx', '.c', '.cpp', '.h'}
-    skip_dirs = {'node_modules', '.git', '__pycache__', 'dist', 'build', '.venv', 'venv'}
+    skip_dirs = {'node_modules', '.git', '__pycache__', 'dist', 'build', '.venv', 'venv', '.next', 'out', '.cache'}
     
     file_list = []
     
