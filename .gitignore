@@ -16,3 +16,6 @@ Thumbs.db
 
 # Local project cache
 backend/cache.json
+
+# Frontend local config
+frontend/.env
