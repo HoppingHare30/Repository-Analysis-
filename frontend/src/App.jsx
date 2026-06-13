@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useGraph } from './hooks/useGraph';
 import Canvas from './components/Canvas';
+import SidePanel from './components/SidePanel';
 
 function App() {
   const [repoPath, setRepoPath] = useState('');
@@ -84,46 +85,10 @@ function App() {
 
         {/* Side Panel (30% width, conditional render) */}
         {selectedFile && (
-          <aside className="w-[30%] h-full bg-[#121214] border-l border-neutral-900 flex flex-col z-20 shadow-2xl animate-in slide-in-from-right duration-200">
-            <div className="flex items-center justify-between p-4 border-b border-neutral-900 bg-neutral-950/40">
-              <span className="text-xs font-bold text-neutral-400 tracking-wider uppercase">File Inspector</span>
-              <button 
-                onClick={() => setSelectedFile(null)}
-                className="p-1 text-neutral-500 hover:text-neutral-200 rounded hover:bg-neutral-900 transition-colors"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            
-            <div className="flex-1 p-6 overflow-y-auto space-y-6">
-              <div>
-                <label className="text-[10px] text-neutral-600 uppercase tracking-widest block mb-1">Path</label>
-                <div className="text-xs text-blue-400 font-semibold break-all bg-neutral-950/50 p-2.5 rounded border border-neutral-900/60">
-                  {selectedFile}
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-neutral-950/30 p-4 rounded-lg border border-neutral-900">
-                  <div className="text-[10px] text-neutral-600 uppercase tracking-wider mb-1">LoC</div>
-                  <div className="text-lg font-bold text-neutral-300">0</div>
-                </div>
-                <div className="bg-neutral-950/30 p-4 rounded-lg border border-neutral-900">
-                  <div className="text-[10px] text-neutral-600 uppercase tracking-wider mb-1">Complexity</div>
-                  <div className="text-lg font-bold text-neutral-300">0</div>
-                </div>
-              </div>
-
-              <div className="bg-neutral-950/20 p-4 rounded-lg border border-neutral-900/40">
-                <div className="text-[10px] text-neutral-600 uppercase tracking-wider mb-2">AI File Explanation</div>
-                <div className="text-xs text-neutral-400 leading-relaxed italic">
-                  Select a file from the dependency graph to retrieve its AI summary.
-                </div>
-              </div>
-            </div>
-          </aside>
+          <SidePanel
+            filePath={selectedFile}
+            onClose={() => setSelectedFile(null)}
+          />
         )}
       </div>
     </div>
