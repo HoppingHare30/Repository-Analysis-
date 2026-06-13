@@ -17,6 +17,7 @@ from backend.parser.traverser import traverse_repo
 from backend.parser.dependency import extract_dependencies
 from backend.parser.metrics import calculate_metrics
 from backend.models.graph import GraphResponse, Node, Edge, Metrics, Position
+from backend.ai.gemini import get_summary as ai_get_summary
 
 app = FastAPI(title="Repo Explorer API")
 
@@ -89,9 +90,15 @@ async def get_graph(path: str = Query(..., description="Absolute path to local r
     return GraphResponse(nodes=nodes, edges=edges)
 
 @app.get("/api/summary")
-async def get_summary():
-    return {"status": "ok"}
+async def get_summary(file: str = Query(..., description="Absolute path to file")):
+    if not os.path.exists(file) or not os.path.isfile(file):
+        raise HTTPException(status_code=400, detail="File not found")
+    summary, cached = ai_get_summary(file)
+    return {"summary": summary, "cached": cached}
 
 @app.get("/api/metrics")
-async def get_metrics():
-    return {"status": "ok"}
+async def get_metrics(file: str = Query(..., description="Absolute path to file")):
+    if not os.path.exists(file) or not os.path.isfile(file):
+        raise HTTPException(status_code=400, detail="File not found")
+    metrics = calculate_metrics(file)
+    return {"loc": metrics["loc"], "complexity": metrics["complexity"]}
