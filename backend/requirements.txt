@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+tree-sitter
+tree-sitter-python
+tree-sitter-javascript
+tree-sitter-c
+google-generativeai
+python-dotenv
+pydantic
