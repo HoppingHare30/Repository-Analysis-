@@ -126,6 +126,11 @@ def resolve_c_include(include_path: str, file_path: str, root_path: str) -> Opti
     if os.path.isfile(cand_root):
         return os.path.abspath(cand_root)
         
+    # Try inside an 'include/' directory under root_path (common C/C++ layout)
+    cand_inc = os.path.join(root_path, 'include', include_path)
+    if os.path.isfile(cand_inc):
+        return os.path.abspath(cand_inc)
+        
     return None
 
 def parse_c_includes_fallback(content: str) -> List[str]:
