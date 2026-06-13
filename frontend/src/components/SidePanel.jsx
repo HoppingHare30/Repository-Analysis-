@@ -50,7 +50,7 @@ const SidePanel = ({ filePath, onClose }) => {
   }, [filePath]);
 
   return (
-    <aside className="w-[30%] h-full bg-[#1a1a1a] border-l border-[#2d2d2d] flex flex-col z-20 shadow-2xl animate-in slide-in-from-right duration-200">
+    <aside className="w-[30%] h-full bg-[#1a1a1a] border-l border-[#2d2d2d] flex flex-col z-20 shadow-2xl animate-in slide-in-from-right fade-in duration-300 ease-in-out">
       {/* Panel Header */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-[#2d2d2d] bg-neutral-950/20">
         <span className="text-[10px] font-bold text-neutral-400 tracking-widest uppercase">File Inspector</span>
@@ -65,7 +65,7 @@ const SidePanel = ({ filePath, onClose }) => {
         </button>
       </div>
 
-      {/* Loading State */}
+      {/* Main Body */}
       {loading ? (
         <div className="flex-1 flex flex-col items-center justify-center gap-3 bg-neutral-900/10">
           <svg className="animate-spin h-6 w-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -120,6 +120,11 @@ const SidePanel = ({ filePath, onClose }) => {
           </div>
         </div>
       )}
+
+      {/* Panel Footer */}
+      <div className="px-6 py-3 border-t border-[#2d2d2d] bg-neutral-950/10 text-center shrink-0">
+        <span className="text-[9px] text-neutral-600 font-mono tracking-wider uppercase">Powered by Gemini Flash</span>
+      </div>
     </aside>
   );
 };
