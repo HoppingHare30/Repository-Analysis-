@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { fetchSummary, fetchMetrics } from '../api';
 
-const SidePanel = ({ filePath, onClose }) => {
+const SidePanel = ({ filePath, repoPath, onClose }) => {
   const [metrics, setMetrics] = useState(null);
   const [summary, setSummary] = useState('');
   const [isCached, setIsCached] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!filePath) return;
+    if (!filePath || !repoPath) return;
 
     let isMounted = true;
     setLoading(true);
@@ -16,13 +16,18 @@ const SidePanel = ({ filePath, onClose }) => {
     setSummary('');
     setIsCached(false);
 
-    // Call fetchMetrics and fetchSummary in parallel
+    // Combine repoPath (absolute root) and filePath (relative path)
+    const cleanRepo = repoPath.replace(/\/+$/, '');
+    const cleanRel = filePath.replace(/^\/+/, '');
+    const absolutePath = `${cleanRepo}/${cleanRel}`;
+
+    // Call fetchMetrics and fetchSummary in parallel using the absolute path
     Promise.all([
-      fetchMetrics(filePath).catch(err => {
+      fetchMetrics(absolutePath).catch(err => {
         console.error('Metrics fetch error:', err);
         return { loc: 0, complexity: 0 };
       }),
-      fetchSummary(filePath).catch(err => {
+      fetchSummary(absolutePath).catch(err => {
         console.error('Summary fetch error:', err);
         return { summary: 'Summary unavailable.', cached: false };
       })
@@ -47,7 +52,7 @@ const SidePanel = ({ filePath, onClose }) => {
     return () => {
       isMounted = false;
     };
-  }, [filePath]);
+  }, [filePath, repoPath]);
 
   return (
     <aside className="w-[30%] h-full bg-[#1a1a1a] border-l border-[#2d2d2d] flex flex-col z-20 shadow-2xl animate-in slide-in-from-right fade-in duration-300 ease-in-out">

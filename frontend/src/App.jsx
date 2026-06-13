@@ -129,6 +129,7 @@ function App() {
         {selectedFile && (
           <SidePanel
             filePath={selectedFile}
+            repoPath={repoPath}
             onClose={() => setSelectedFile(null)}
           />
         )}
