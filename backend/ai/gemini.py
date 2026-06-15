@@ -48,7 +48,7 @@ def get_summary(file_path: str) -> Tuple[str, bool]:
         if not os.getenv("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY") == "your_key_here":
             return "Summary unavailable.", False
             
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         response = model.generate_content(prompt)
         
         summary = response.text.strip()
