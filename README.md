@@ -1,10 +1,10 @@
-# Repo Explorer 🔍
+# Repo Explorer
 
 Repo Explorer is an interactive web-based repository visualization and analysis tool. It allows developers to ingest a local Git repository, parse its file dependencies, visualize the file-to-file connection structure as an interactive network canvas, and inspect metrics, logic complexity, and AI-generated summaries for individual files.
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 * **Interactive Dependency Graph**: Visualize directories and files as a clean, styled React Flow network.
   * Nodes represent files (color-coded by programming language) and directories.
@@ -22,7 +22,7 @@ Repo Explorer is an interactive web-based repository visualization and analysis 
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **Backend**: 
   * [FastAPI](https://fastapi.tiangolo.com/) (Python web framework)
@@ -37,7 +37,7 @@ Repo Explorer is an interactive web-based repository visualization and analysis 
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 * Python **3.9+** (Fully backward-compatible with 3.9.6+)
@@ -101,7 +101,7 @@ Repo Explorer is an interactive web-based repository visualization and analysis 
 
 ---
 
-## 📋 Assumptions & Scope
+## Assumptions & Scope
 
 ### 1. Ignored Directories & Files
 To preserve memory, processing efficiency, and avoid visual clutter, the traverser ignores the following folders:
